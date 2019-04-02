@@ -298,7 +298,8 @@ describe "GMO::Payment::ShopAPI" do
         :tel_no        => '0300000001',
         :receipts_disp_11 => 'RSpec Helpdesk',
         :receipts_disp_12 => '0300000001',
-        :receipts_disp_13 => '00:00-00:15'
+        :receipts_disp_13 => '00:00-00:15',
+        :payment_type => 'E'
       })
       result["OrderID"].nil?.should_not be_truthy
       result["CustID"].nil?.should_not be_truthy
@@ -313,7 +314,7 @@ describe "GMO::Payment::ShopAPI" do
     it "got error if missing options", :vcr do
       lambda {
         result = @service.exec_tran_pay_easy()
-      }.should raise_error("Required access_id, access_pass, order_id, customer_name, customer_kana, tel_no, receipts_disp_11, receipts_disp_12, receipts_disp_13 were not provided.")
+      }.should raise_error("Required access_id, access_pass, order_id, customer_name, customer_kana, tel_no, receipts_disp_11, receipts_disp_12, receipts_disp_13, payment_type were not provided.")
     end
   end
 
