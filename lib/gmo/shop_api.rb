@@ -191,12 +191,30 @@ module GMO
         post_request name, options
       end
 
+      # 2.2.2.1. 支払い停止
+      # コンビニ決済センターとの通信を行い取引の支払い停止処理を行います。
+      def cvs_cancel(options = {})
+        name = "CvsCancel.idPass"
+        required = [:access_id, :access_pass, :order_id]
+        assert_required_options(required, options)
+        post_request name, options
+      end
+
       # 【Pay-easy決済】
       # 5.1.2.2. 決済実行
       # お客様が入力した情報で後続の決済センターと通信を行い決済を実施し、結果を返します。
       def exec_tran_pay_easy(options = {})
         name = "ExecTranPayEasy.idPass"
         required = [:access_id, :access_pass, :order_id, :customer_name, :customer_kana, :tel_no, :receipts_disp_11, :receipts_disp_12, :receipts_disp_13, :payment_type]
+        assert_required_options(required, options)
+        post_request name, options
+      end
+
+      # 5.2.2.1. 支払い停止
+      # 決済センターとの通信を行い取引の支払い停止処理を行います。
+      def pay_easy_cancel(options = {})
+        name = "PayEasyCancel.idPass"
+        required = [:access_id, :access_pass, :order_id]
         assert_required_options(required, options)
         post_request name, options
       end
